@@ -22,7 +22,7 @@ var distance = 80;
 
 var canvas = document.querySelector('canvas');
 
-const scale = 1;//window.devicePixelRatio;
+const scale = window.devicePixelRatio;
 var pw = canvas.parentElement.clientWidth;
 var u = (pw - 40)/ 580;
 var w = 580 * u;
@@ -37,6 +37,7 @@ function toRadians(degrees) {
 
 canvas.width = w * scale;
 canvas.height = h * scale;
+//u /= scale;
 
 canvas.style.width = w + "px";
 canvas.style.height = h + "px";
