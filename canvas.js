@@ -390,11 +390,11 @@ function animate() {
 
     if(i == 0 || i == 3 || i == 7 || i == 9) {
       delta = step;
-      c.strokeStyle = "#C08000";
+      c.strokeStyle = "#D09000";
     }
     else {
       delta = frames;
-      c.strokeStyle = "rgb(240, 240, 240)";
+      c.strokeStyle = "white";
     }
 
     c.moveTo(objects[0] * delta / frames, object[0].y);
