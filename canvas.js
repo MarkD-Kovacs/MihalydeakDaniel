@@ -374,11 +374,26 @@ objects.push(points.slice());
 
 console.log(objects);
 
-var step = 0;
-var delta = 0;
-var frames = 45;
+c.shadowColor = 'rgba(208, 144, 0, 1)';  // "transparent";
+c.shadowOffsetX = 0;                    // Horizontal shadow offset
+c.shadowOffsetY = 0; 
+
+var delta;
+var colorDelta;
+var animationScale = 1.25;
+var miliseconds = 800 * animationScale;
+var totalDuration = miliseconds * 1.25;
+var lastTime;
+var startTime;
+//c.lineJoin = "bevel";
+c.lineJoin = "miter";
+c.miterLimit = 4 * u;
 function animate() {
-  requestAnimationFrame(animate);
+
+  const elapsedTime = performance.now() - startTime;
+
+  if (elapsedTime <= totalDuration)
+    requestAnimationFrame(animate);
 
   // clear canvas
   c.clearRect(0, 0, innerWidth, innerHeight);
@@ -389,25 +404,40 @@ function animate() {
     c.beginPath();
 
     if(i == 0 || i == 3 || i == 7 || i == 9) {
-      delta = step;
-      c.strokeStyle = "#D09000";
+      delta = Math.min(elapsedTime / miliseconds, 1);
+      if (elapsedTime < miliseconds) {
+        colorDelta = delta;   
+        //c.shadowColor = 'rgba(208, 144, 0, ' + c.shadowBlur / 50 + ')';
+        //console.log(c.shadowColor);
+      }
+      else {
+        colorDelta = Math.max((totalDuration - elapsedTime) / (totalDuration - miliseconds), 0);  
+        //c.shadowColor = 'rgba(208, 144, 0, ' + c.shadowBlur / 50 + ')';
+      }
+      //console.log(elapsedTime);
+      c.shadowBlur = colorDelta * 50;
+      //c.strokeStyle = "rgb(208, 144, 0)"
+      var r = Math.round(208 + (255 - 208) * colorDelta);
+      var g = Math.round(144 + (255 - 144) * colorDelta);
+      var b = Math.round(0 + (200 - 0) * colorDelta);
+      var hex = "#" + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+      //console.log(hex);
+      c.strokeStyle = hex;
+      c.shadowColor = hex;
     }
     else {
-      delta = frames;
+      delta = 1;
       c.strokeStyle = "white";
+      c.shadowColor = "transparent";
     }
 
-    c.moveTo(objects[0] * delta / frames, object[0].y);
-    //c.lineJoin = "bevel";
+    c.moveTo(objects[0] * delta, object[0].y);
     c.lineWidth = 6 * u;
     object.forEach(point => {
-      c.lineTo(point.x * delta / frames, point.y);
+      c.lineTo(point.x * delta, point.y);
     });
-    //c.lineTo(object[0].x, object[0].y);
-    //c.lineTo(object[1].x, object[1].y);
     c.stroke();
   }
-  if (step < frames) step++;
 }
 
 
@@ -423,4 +453,5 @@ function openMap() {
   }
 }
 
+startTime = performance.now();
 animate();
