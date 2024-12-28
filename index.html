@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mihalydeak</title>
+        <title>Mihalydeak Daniel</title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
         <style type="text/css">
             body {
                 margin: 0;
-                padding: 0;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -18,24 +18,36 @@
                 max-width: 800px;
                 width: 100vw;
             }
+            header, main {
+                max-width: 800px;
+                margin: 0;
+            }
         </style>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
     <body style="background: black">
-        <canvas></canvas>
-        <script src="canvas.js"></script>
 
-        <hr style="background: white; width: 85%; height: 3px; margin-top: 4px; margin-bottom: 12px">
-        <div style="background: black; width: 100%; display: flex; 
-        flex-direction: column;
-        align-items: center;">
-            <h2 style=" color: rgb(180, 180, 180); margin-bottom: 20px; font-family: Brush Script MT, Brush Script Std; font-size: 3rem;">&ldquo;Geometria este calea&rdquo;</h2>
-        </div>
+        <header style="padding-left: 20px; padding-right: 20px; height: auto; width: 100%; display:flex; flex-direction: row; align-items: center; gap: 20px; ">
 
+            <img src="profil.png" alt="profil" style="width: 25%; border-radius: 50%; margin: 5px 0px">
 
-        <div id="carouselExampleCaptions" class="carousel slide">
+            <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center;">
+                <canvas style="width:0;"></canvas>
+                <script src="canvas.js"></script>
+
+                <hr style="background: white; width: 100%; height: 3px; margin-top: 4px; margin-bottom: 8px">
+                <div style="background: black; width: 100%; display: flex; flex-direction: column; align-items: center; margin-bottom: 5px;">
+                    <h2 style=" color: rgb(210, 210, 210); font-family: Brush Script MT, Brush Script Std; font-size: 32px;">&ldquo;Geometria este calea&rdquo;</h2>
+                </div>
+            
+            </div>
+
+        </header>
+
+        <main>
+            <div id="carouselExampleCaptions" class="carousel slide">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
               <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -92,13 +104,16 @@
 
             <a style="color: inherit; text-decoration: none; font-weight: bold;" href="https://mero.ro/p/sigma-studio">
                 <img style="filter: grayscale(100%)" src="mero.png" alt="Location Pin" width="50" height="50">
-                <span style="color: white; margin-left: 10px;">&larr; Programari Aici</span>
+                <span style="color: white; margin-left: 10px;">&larr; Programări Aici</span>
             </a>
               
           </div>
         </div>
+        
+            
+    </body>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         
-    </body>
+</main>
 </html>

@@ -22,11 +22,14 @@ var distance = 80;
 
 var canvas = document.querySelector('canvas');
 
-const scale = window.devicePixelRatio;
-var u = 0.7 / scale;
-var w = window.innerWidth; //canvas.parentElement.clientWidth;
+const scale = 1;//window.devicePixelRatio;
+var pw = canvas.parentElement.clientWidth;
+var u = (pw - 40)/ 580;
+var w = 580 * u;
 var h = 120 * u; // window.innerHeight / 4; //canvas.parentElement.clientHeight;
 console.log(scale);
+console.log(pw);
+console.log(u);
 
 function toRadians(degrees) {
   return degrees * (Math.PI / 180);
@@ -57,7 +60,7 @@ const baseY = 95 * u;
 const baseYHorizontal = 92 * u;
 
 /* M */
-referencePoint.x = (w - 565 * u) / 2;
+referencePoint.x = 8 * u;
 referencePoint.y = baseY;
 direction = -90;
 distance = 71 * u;
@@ -386,11 +389,11 @@ function animate() {
 
     if(i == 0 || i == 3 || i == 7 || i == 9) {
       delta = step;
-      c.strokeStyle = "#905800";
+      c.strokeStyle = "#C08000";
     }
     else {
       delta = frames;
-      c.strokeStyle = "rgb(180, 180, 180)";
+      c.strokeStyle = "rgb(240, 240, 240)";
     }
 
     c.moveTo(objects[0] * delta / frames, object[0].y);
