@@ -24,7 +24,7 @@ var canvas = document.querySelector('canvas');
 
 const scale = window.devicePixelRatio;
 var pw = canvas.parentElement.clientWidth;
-var u = (pw - 40)/ 580;
+var u = Math.min(96 / 120, (pw - 40) / 580);
 var w = 580 * u;
 var h = 120 * u; // window.innerHeight / 4; //canvas.parentElement.clientHeight;
 console.log(scale);
@@ -57,8 +57,8 @@ function updateTargetFn() {
 var lines = [];
 var points = [];
 var objects = [];
-const baseY = 95 * u;
-const baseYHorizontal = 92 * u;
+const baseY = 98 * u;
+const baseYHorizontal = 95 * u;
 
 /* M */
 referencePoint.x = 8 * u;
@@ -381,13 +381,21 @@ c.shadowOffsetY = 0;
 var delta;
 var colorDelta;
 var animationScale = 1.25;
-var miliseconds = 800 * animationScale;
-var totalDuration = miliseconds * 1.25;
+var peak = 1000 * animationScale;
+var totalDuration = peak * 1.5;
 var lastTime;
 var startTime;
 //c.lineJoin = "bevel";
 c.lineJoin = "miter";
 c.miterLimit = 4 * u;
+
+function fade(x) {
+  if (x < peak)
+    return -1 * x * (x - 2 * peak);
+  else
+    return -4 * (x - 1 / 2 * peak) * (x - 3 / 2 * peak);
+}
+
 function animate() {
 
   const elapsedTime = performance.now() - startTime;
@@ -403,15 +411,15 @@ function animate() {
     object = objects[i];
     c.beginPath();
 
-    if(i == 0 || i == 3 || i == 7 || i == 9) {
-      delta = Math.min(elapsedTime / miliseconds, 1);
-      if (elapsedTime < miliseconds) {
+    if(i == 3 || i == 7 || i == 9) {
+      delta = Math.min(elapsedTime / peak, 1);
+      if (elapsedTime < peak) {
         colorDelta = delta;   
         //c.shadowColor = 'rgba(208, 144, 0, ' + c.shadowBlur / 50 + ')';
         //console.log(c.shadowColor);
       }
       else {
-        colorDelta = Math.max((totalDuration - elapsedTime) / (totalDuration - miliseconds), 0);  
+        colorDelta = Math.max((totalDuration - elapsedTime) / (totalDuration - peak), 0);  
         //c.shadowColor = 'rgba(208, 144, 0, ' + c.shadowBlur / 50 + ')';
       }
       //console.log(elapsedTime);
