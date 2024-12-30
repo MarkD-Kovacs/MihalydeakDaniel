@@ -380,9 +380,8 @@ c.shadowOffsetY = 0;
 
 var delta;
 var colorDelta;
-var animationScale = 1.25;
-var peak = 1000 * animationScale;
-var totalDuration = peak * 1.5;
+var peak = 1500;
+var totalDuration = peak * 1.41;
 var lastTime;
 var startTime;
 //c.lineJoin = "bevel";
@@ -390,10 +389,9 @@ c.lineJoin = "miter";
 c.miterLimit = 4 * u;
 
 function fade(x) {
-  if (x < peak)
-    return -1 * x * (x - 2 * peak);
-  else
-    return -4 * (x - 1 / 2 * peak) * (x - 3 / 2 * peak);
+  //return Math.max(Math.sin(x * Math.PI / (2 * peak)), 0);
+
+  //return Math.max(1 - Math.abs(x - peak) / peak, 0);
 }
 
 function animate() {
@@ -427,7 +425,7 @@ function animate() {
       //c.strokeStyle = "rgb(208, 144, 0)"
       var r = Math.round(208 + (255 - 208) * colorDelta);
       var g = Math.round(144 + (255 - 144) * colorDelta);
-      var b = Math.round(0 + (200 - 0) * colorDelta);
+      var b = Math.round(0 + (255 - 55) * colorDelta);
       var hex = "#" + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
       //console.log(hex);
       c.strokeStyle = hex;
